@@ -63,10 +63,8 @@ public class Main extends JavaPlugin implements Listener {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("souls")) {
-            if (sender instanceof ConsoleCommandSender) {
-                if (args.length == 0) {
-                    sender.sendMessage("");
-                    sender.sendMessage(ChatColor.GREEN + "[Souls]: " + ChatColor.YELLOW + "Created By VoChiDanh");
+            if (args.length == 0) {
+                if (sender instanceof ConsoleCommandSender) {
                     sender.sendMessage("");
                     sender.sendMessage(ChatColor.GRAY + "/souls " + ChatColor.WHITE + "xem các lệnh giúp đỡ.");
                     sender.sendMessage(ChatColor.GRAY + "/souls add <player> <amount> " + ChatColor.WHITE + "Thêm souls cho người chơi.");
@@ -79,14 +77,14 @@ public class Main extends JavaPlugin implements Listener {
                     if (!sender.hasPermission("souls.help")) {
                         sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                     }
-                    sender.sendMessage("");
-                    sender.sendMessage(ChatColor.GREEN + "[Souls]: " + ChatColor.YELLOW + "Created By VoChiDanh");
-                    sender.sendMessage("");
-                    sender.sendMessage(ChatColor.GRAY + "/souls " + ChatColor.WHITE + "xem các lệnh giúp đỡ.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls add <player> <amount> " + ChatColor.WHITE + "Thêm souls cho người chơi.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls remove <player> <amount> " + ChatColor.WHITE + "Bỏ souls khỏi người chơi.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls check <player> <amount> " + ChatColor.WHITE + "Kiểm tra số lượng souls người chơi có.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls reload " + ChatColor.WHITE + "Tải lại config.");
+                    if (sender.hasPermission("souls.help")) {
+                        sender.sendMessage("");
+                        sender.sendMessage(ChatColor.GRAY + "/souls " + ChatColor.WHITE + "xem các lệnh giúp đỡ.");
+                        sender.sendMessage(ChatColor.GRAY + "/souls add <player> <amount> " + ChatColor.WHITE + "Thêm souls cho người chơi.");
+                        sender.sendMessage(ChatColor.GRAY + "/souls remove <player> <amount> " + ChatColor.WHITE + "Bỏ souls khỏi người chơi.");
+                        sender.sendMessage(ChatColor.GRAY + "/souls check <player> <amount> " + ChatColor.WHITE + "Kiểm tra số lượng souls người chơi có.");
+                        sender.sendMessage(ChatColor.GRAY + "/souls reload " + ChatColor.WHITE + "Tải lại config.");
+                    }
                 }
             }
 
@@ -99,11 +97,14 @@ public class Main extends JavaPlugin implements Listener {
 
                     Player player = (Player) sender;
 
-                    if (!sender.hasPermission("souls.reload")) {
+                    if (!sender.hasPermission("souls.admin")) {
                         sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                     }
-                    Main.this.reloadConfig();
-                    sender.sendMessage(ChatColor.GREEN + "[Souls] Tải lại config !");
+
+                    if (sender.hasPermission("souls.admin")) {
+                        Main.this.reloadConfig();
+                        sender.sendMessage(ChatColor.GREEN + "[Souls] Tải lại config !");
+                    }
                 }
             }
 
@@ -143,12 +144,14 @@ public class Main extends JavaPlugin implements Listener {
 
                         Player player = (Player) sender;
 
-                        if (!sender.hasPermission("souls.add")) {
+                        if (!sender.hasPermission("souls.admin")) {
                             sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         }
 
-                        this.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        player.sendMessage(ChatColor.GREEN + "[Souls] Đã thêm " + Integer.parseInt(args[2]) + " Souls cho " + Bukkit.getPlayer(args[1]).getName() + "!");
+                        if (sender.hasPermission("souls.admin")) {
+                            this.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
+                            player.sendMessage(ChatColor.GREEN + "[Souls] Đã thêm " + Integer.parseInt(args[2]) + " Souls cho " + Bukkit.getPlayer(args[1]).getName() + "!");
+                        }
                     }
                 }
 
@@ -173,24 +176,26 @@ public class Main extends JavaPlugin implements Listener {
                         if (!sender.hasPermission("souls.add")) {
                             sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         }
-                        if (Bukkit.getPlayer(args[1]) == null) {
-                            sender.sendMessage(ChatColor.RED + "[Souls] Người chơi không hoạt động!");
-                            return true;
-                        }
-                        if (this.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
-                            sender.sendMessage(ChatColor.RED + "[Souls] Souls không đủ!");
-                            return true;
-                        }
+                        if (sender.hasPermission("souls.admin")) {
+                            if (Bukkit.getPlayer(args[1]) == null) {
+                                sender.sendMessage(ChatColor.RED + "[Souls] Người chơi không hoạt động!");
+                                return true;
+                            }
+                            if (this.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
+                                sender.sendMessage(ChatColor.RED + "[Souls] Souls không đủ!");
+                                return true;
+                            }
 
-                        this.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(ChatColor.GREEN + "[Souls] Đã lấy " + Integer.parseInt(args[2]) + " Souls từ " + Bukkit.getPlayer(args[1]).getName() + "!");
+                            this.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
+                            sender.sendMessage(ChatColor.GREEN + "[Souls] Đã lấy " + Integer.parseInt(args[2]) + " Souls từ " + Bukkit.getPlayer(args[1]).getName() + "!");
+                        }
                     }
                 }
             }
         }
         return true;
-
     }
+
 
     public void onEnable() {
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
