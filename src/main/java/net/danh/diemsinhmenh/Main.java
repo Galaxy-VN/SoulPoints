@@ -114,18 +114,17 @@ public class Main extends JavaPlugin implements Listener {
                         sender.sendMessage(ChatColor.RED + "[Souls] Người chơi không hoạt động!");
                         return true;
                     }
+
+                    sender.sendMessage(ChatColor.GREEN + "[Souls] " + Bukkit.getPlayer(args[1]).getName() + " có " + this.getLives(Bukkit.getPlayer(args[1])) + " Souls!");
                 }
-
-                sender.sendMessage(ChatColor.GREEN + "[Souls] " + Bukkit.getPlayer(args[1]).getName() + " có " + this.getLives(Bukkit.getPlayer(args[1])) + " Souls!");
-
                 if (sender instanceof Player) {
                     if (Bukkit.getPlayer(args[1]) == null) {
                         sender.sendMessage(ChatColor.RED + "[Souls] Người chơi không hoạt động!");
                         return true;
                     }
-                }
 
-                sender.sendMessage(ChatColor.GREEN + "[Souls] " + Bukkit.getPlayer(args[1]).getName() + " có " + this.getLives(Bukkit.getPlayer(args[1])) + " Souls!");
+                    sender.sendMessage(ChatColor.GREEN + "[Souls] " + Bukkit.getPlayer(args[1]).getName() + " có " + this.getLives(Bukkit.getPlayer(args[1])) + " Souls!");
+                }
             }
 
             if (args.length == 3) {
@@ -217,7 +216,7 @@ public class Main extends JavaPlugin implements Listener {
         this.getConfig().addDefault("daily-souls", 60);
         this.getConfig().addDefault("lose-soul-message-after", 3);
         this.getConfig().addDefault("soul-earn-message", "&d[Souls] &fBạn nhận được 1 Soul!");
-        this.getConfig().addDefault("death-message", "&d[Souls] &fBạn đã mất 1 Soul, bây giờ bạn có %souls% Souls!");
+        this.getConfig().addDefault("death-message", "&d[Souls] &fBạn đã mất 1 Souls, bây giờ bạn có %souls% Souls!");
         this.getConfig().addDefault("death-message-inventory", "&4[Souls] &cBạn đã mất hết souls. Túi đồ của bạn đã bị rớt mất!");
         this.getConfig().addDefault("soul-message", "&d[Souls] &fBạn đang có %souls% souls!");
         this.saveConfig();
