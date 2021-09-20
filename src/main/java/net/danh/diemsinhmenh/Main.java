@@ -198,6 +198,10 @@ public class Main extends JavaPlugin implements Listener {
 
 
     public void onEnable() {
+        // Small check to make sure that PlaceholderAPI is installed
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new placeholder(this).register();
+        }
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         this.createConfig();
         ArrayList<String> worlds = new ArrayList();

@@ -7,3 +7,5 @@ authors: [ VoChiDanh ]
 description: Diem sinh menh cua nguoi choi
 commands:
   souls:
+    description: xem toan bo lenh cua plugin
+    usage: /<commands>
