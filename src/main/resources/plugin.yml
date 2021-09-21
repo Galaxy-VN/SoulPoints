@@ -1,7 +1,6 @@
 name: DiemSinhMenh
 version: '${project.version}'
 main: net.danh.diemsinhmenh.Main
-api-version: 1.17
 softdepend: [ ActionBarAPI ]
 authors: [ VoChiDanh ]
 description: Diem sinh menh cua nguoi choi
