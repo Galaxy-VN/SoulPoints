@@ -5,8 +5,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -197,7 +195,6 @@ public class Main extends JavaPlugin implements Listener {
 
 
     public void onEnable() {
-        // Small check to make sure that PlaceholderAPI is installed
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
         }
@@ -212,13 +209,14 @@ public class Main extends JavaPlugin implements Listener {
         worlds.add("sinhton_the_end");
         this.getConfig().addDefault("available-worlds", worlds);
         this.getConfig().addDefault("bar-message", "&bBạn đang có &e%souls% &bsouls!");
-        this.getConfig().addDefault("default-amount-souls", 2);
+        this.getConfig().addDefault("default-amount-souls", 5);
         this.getConfig().addDefault("daily-souls", 60);
         this.getConfig().addDefault("lose-soul-message-after", 3);
         this.getConfig().addDefault("soul-earn-message", "&d[Souls] &fBạn nhận được 1 Soul!");
         this.getConfig().addDefault("death-message", "&d[Souls] &fBạn đã mất 1 Souls, bây giờ bạn có %souls% Souls!");
         this.getConfig().addDefault("death-message-inventory", "&4[Souls] &cBạn đã mất hết souls. Túi đồ của bạn đã bị rớt mất!");
         this.getConfig().addDefault("soul-message", "&d[Souls] &fBạn đang có %souls% souls!");
+        this.getConfig().addDefault("config-version", 1);
         this.saveConfig();
         data = new data(new File(this.getDataFolder() + "/data/data.yml"));
         data.getConfig().options().copyDefaults(true);
@@ -238,8 +236,6 @@ public class Main extends JavaPlugin implements Listener {
                         if (!Main.data.getConfig().contains("Lives." + p.getUniqueId())) {
                             Main.this.addLives(p, Main.this.getConfig().getInt("default-amount-souls"));
                         }
-
-                        ActionBarAPI.sendActionBar(p, Main.this.convert(Main.this.getConfig().getString("bar-message")).replaceAll("%souls%", String.valueOf(Main.this.getLives(p))));
                     }
                 }
 
