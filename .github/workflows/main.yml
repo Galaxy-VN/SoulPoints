@@ -20,16 +20,16 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%H:%M %m/%d/%Y')"
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          title: "DiemSinhMenh Release ${{ steps.date.outputs.date }}"
-          files: |
-            target/DiemSinhMenh-*.jar
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%H:%M %m/%d/%Y')"
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        title: "DiemSinhMenh Release ${{ steps.date.outputs.date }}"
+        files: |
+          target/DiemSinhMenh-*.jar
 
 
 
