@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    if: contains(github.event.head_commit.message, '[Release]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 16
+        uses: actions/setup-java@v2
+        with:
+          java-version: 16
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%H:%M %m/%d/%Y')"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "DSM Release ${{ steps.date.outputs.date }}"
+          files: |
+            target/DiemSinhMenh-*.jar
