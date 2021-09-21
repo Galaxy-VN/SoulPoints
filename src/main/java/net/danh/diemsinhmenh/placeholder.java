@@ -19,7 +19,7 @@ public class placeholder extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "dsm";
+        return "sp";
     }
 
     @Override
