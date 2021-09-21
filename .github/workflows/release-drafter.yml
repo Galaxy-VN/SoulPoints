@@ -3,12 +3,6 @@
   # uses: release-drafter/release-drafter@fe52e97d262833ae07d05efaf1a239df3f1b5cd4
   uses: release-drafter/release-drafter@v5.15.0
   with:
-    # If your workflow requires multiple release-drafter configs it be helpful to override the config-name.
-The config should still be located inside `.github` as that's where we are looking for config files.
-    name: Release # optional
-    # The tag name to be associated with the GitHub release that's created or updated.
-This will override any `tag-template` specified in your `release-drafter.yml` if defined.
-
     tag: Release # optional
     # The version to be associated with the GitHub release that's created or updated.
 This will override any version calculated by the release-drafter.
