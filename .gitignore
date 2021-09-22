@@ -17,8 +17,7 @@ out/
 # BlueJ files
 *.ctxt
 
-# Package Files #
-*.jar
+# Package Files #\
 *.war
 *.nar
 *.ear
@@ -95,7 +94,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-target/
 
 pom.xml.tag
 pom.xml.releaseBackup
