@@ -1,0 +1,19 @@
+available-worlds:
+  - world
+  - world_nether
+  - world_the_end
+default-amount-souls: 5
+daily-souls: 60
+lose-soul-message-after: 3
+soul-earn-message: '&d[Souls] &fYou have earned 1 Soul!'
+death-message: '&d[Souls] &fYou have lost 1 Soul, You have %souls% Souls Now!'
+death-message-inventory: '&4[Souls] &cYou have lost all of your souls, your inventory
+  has been dropped!'
+take-message: '&4[Souls] &cRemove %souls% souls from %player%'
+add-message: '&4[Souls] &cAdd %souls% souls to %player%'
+check-message: '&4[Souls] &c%player% has %souls%'
+soul-message: '&d[Souls] &fYou have %souls% souls!'
+not-online: '&d[Souls] &cThat player is not online!'
+enough: '&d[Souls] &cToo much amount to remove!'
+reload: '&d[Souls] &cReload Config'
+config-version: 2

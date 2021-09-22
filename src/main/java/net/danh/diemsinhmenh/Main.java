@@ -201,29 +201,16 @@ public class Main extends JavaPlugin implements Listener {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
         }
+
+        int configVersion = this.getConfig().contains("config-version", true) ? this.getConfig().getInt("config-version") : -1;
+        int defConfigVersion = this.getConfig().getDefaults().getInt("config-version");
+        if (configVersion != defConfigVersion) {
+            this.getLogger().warning("You may be using an outdated config.yml!");
+            this.getLogger().warning("(Your config version: '" + configVersion + "' | Expected config version: '" + defConfigVersion + "')");
+        }
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        this.createConfig();
-        ArrayList<String> worlds = new ArrayList();
-        worlds.add("world");
-        worlds.add("world_nether");
-        worlds.add("world_the_end");
-        this.getConfig().addDefault("available-worlds", worlds);
-        this.getConfig().addDefault("default-amount-souls", 5);
-        this.getConfig().addDefault("daily-souls", 60);
-        this.getConfig().addDefault("lose-soul-message-after", 3);
-        this.getConfig().addDefault("soul-earn-message", "&d[Souls] &fYou have earned 1 Soul!");
-        this.getConfig().addDefault("death-message", "&d[Souls] &fYou have lost 1 Soul, You have %souls% Souls Now!");
-        this.getConfig().addDefault("death-message-inventory", "&4[Souls] &cYou have lost all of your souls, your inventory has been dropped!");
-        this.getConfig().addDefault("take-message", "&4[Souls] &cRemove %souls% souls from %player%");
-        this.getConfig().addDefault("add-message", "&4[Souls] &cAdd %souls% souls to %player%");
-        this.getConfig().addDefault("check-message", "&4[Souls] &c%player% has %souls%");
-        this.getConfig().addDefault("soul-message", "&d[Souls] &fYou have %souls% souls!");
-        this.getConfig().addDefault("not-online", "&d[Souls] &cThat player is not online!");
-        this.getConfig().addDefault("enough", "&d[Souls] &cToo much amount to remove!");
-        this.getConfig().addDefault("reload", "&d[Souls] &cReload Config");
-        this.getConfig().addDefault("config-version", 1);
         this.saveConfig();
-        data = new data(new File(this.getDataFolder() + "/data/data.yml"));
+        data = new data(new File(this.getDataFolder() + "/data.yml"));
         data.getConfig().options().copyDefaults(true);
         data.save();
         (new BukkitRunnable() {
