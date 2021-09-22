@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -197,22 +198,26 @@ public class Main extends JavaPlugin implements Listener {
     }
 
 
+    public void onLoad() {
+        this.saveDefaultConfig();
+    }
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
         }
-
+        Bukkit.getServer().getPluginManager().registerEvents(this, this);
+        FileConfiguration config = this.getConfig();
+        config.options().copyDefaults(true);
+        this.saveConfig();
+        data = new data(new File(this.getDataFolder() + "/data.yml"));
+        data.getConfig().options().copyDefaults(true);
+        data.save();
         int configVersion = this.getConfig().contains("config-version", true) ? this.getConfig().getInt("config-version") : -1;
         int defConfigVersion = this.getConfig().getDefaults().getInt("config-version");
         if (configVersion != defConfigVersion) {
             this.getLogger().warning("You may be using an outdated config.yml!");
             this.getLogger().warning("(Your config version: '" + configVersion + "' | Expected config version: '" + defConfigVersion + "')");
         }
-        Bukkit.getServer().getPluginManager().registerEvents(this, this);
-        this.saveConfig();
-        data = new data(new File(this.getDataFolder() + "/data.yml"));
-        data.getConfig().options().copyDefaults(true);
-        data.save();
         (new BukkitRunnable() {
             public void run() {
                 Iterator var2 = Bukkit.getOnlinePlayers().iterator();
