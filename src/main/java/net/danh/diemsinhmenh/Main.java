@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Main extends JavaPlugin implements Listener {
     public static data data;
 
+
     private void createConfig() {
         try {
             if (!this.getDataFolder().exists()) {
@@ -64,27 +65,22 @@ public class Main extends JavaPlugin implements Listener {
         if (label.equalsIgnoreCase("souls")) {
             if (args.length == 0) {
                 if (sender instanceof ConsoleCommandSender) {
-                    sender.sendMessage("");
-                    sender.sendMessage(ChatColor.GRAY + "/souls " + ChatColor.WHITE + "To view help page for ops.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls add <player> <amount> " + ChatColor.WHITE + "Add souls for a player.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls remove <player> <amount> " + ChatColor.WHITE + "Remove souls for a player.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls check <player> " + ChatColor.WHITE + "Check souls for a player.");
-                    sender.sendMessage(ChatColor.GRAY + "/souls reload " + ChatColor.WHITE + "To reload config.");
+
+                    for(String helpadmin : getConfig().getStringList("help-admin")) {
+                        sender.sendMessage(helpadmin);
+                    }
                 }
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (!sender.hasPermission("souls.admin")) {
                         sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         sender.sendMessage("");
-                        sender.sendMessage(ChatColor.GRAY + "/souls check <player> " + ChatColor.WHITE + "Check souls for a player.");
+                        sender.sendMessage(this.convert(this.getConfig().getString("help-player")));
                     }
                     if (sender.hasPermission("souls.admin")) {
-                        sender.sendMessage("");
-                        sender.sendMessage(ChatColor.GRAY + "/souls " + ChatColor.WHITE + "To view help page for ops.");
-                        sender.sendMessage(ChatColor.GRAY + "/souls add <player> <amount> " + ChatColor.WHITE + "Add souls for a player.");
-                        sender.sendMessage(ChatColor.GRAY + "/souls remove <player> <amount> " + ChatColor.WHITE + "Remove souls for a player.");
-                        sender.sendMessage(ChatColor.GRAY + "/souls check <player>" + ChatColor.WHITE + "Check souls for a player.");
-                        sender.sendMessage(ChatColor.GRAY + "/souls reload " + ChatColor.WHITE + "To reload config.");
+                        for(String helpadmin : getConfig().getStringList("help-admin")) {
+                            sender.sendMessage(helpadmin);
+                        }
                     }
                 }
             }

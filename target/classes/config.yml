@@ -16,4 +16,11 @@ soul-message: '&d[Souls] &fYou have %souls% souls!'
 not-online: '&d[Souls] &cThat player is not online!'
 enough: '&d[Souls] &cToo much amount to remove!'
 reload: '&d[Souls] &cReload Config'
-config-version: 2
+help-player:
+  - "&a/souls check <player> &f- &7Check souls of player"
+help-admin:
+  - "§a/souls check <player> §f- §7Check souls of player"
+  - "§a/souls add <player> <amount> §f- §7Add souls "
+  - "§a/souls remove <player> <amount> §f- §7Remove souls"
+  - "§a/souls reload §f- §7Reload Config"
+config-version: 3
