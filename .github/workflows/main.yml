@@ -33,8 +33,8 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v1.2"
+          automatic_release_tag: "v1.2.1"
           prerelease: false
-          title: "v1.2 ${{ steps.date.outputs.date }}"
+          title: "v1.2.1 ${{ steps.date.outputs.date }}"
           files: |
             ./target/SoulPoints.jar
