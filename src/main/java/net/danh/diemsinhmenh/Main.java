@@ -163,7 +163,6 @@ public class Main extends JavaPlugin implements Listener {
                         }
 
                         this.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(ChatColor.GREEN + "[Souls] Đã lấy " + Integer.parseInt(args[2]) + " Souls từ " + Bukkit.getPlayer(args[1]).getName() + "!");
                         sender.sendMessage(this.convert(this.getConfig().getString("take-message")).replaceAll("%souls%",  String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                     }
 
