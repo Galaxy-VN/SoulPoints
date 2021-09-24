@@ -11,9 +11,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -66,19 +68,19 @@ public class Main extends JavaPlugin implements Listener {
             if (args.length == 0) {
                 if (sender instanceof ConsoleCommandSender) {
 
-                    for(String helpadmin : getConfig().getStringList("help-admin")) {
+                    for (String helpadmin : getConfig().getStringList("Help-admin")) {
                         sender.sendMessage(helpadmin);
                     }
                 }
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (!sender.hasPermission("souls.admin")) {
-                        sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         sender.sendMessage("");
-                        sender.sendMessage(this.convert(this.getConfig().getString("help-player")));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Help-player")));
                     }
                     if (sender.hasPermission("souls.admin")) {
-                        for(String helpadmin : getConfig().getStringList("help-admin")) {
+                        for (String helpadmin : getConfig().getStringList("Help-admin")) {
                             sender.sendMessage(helpadmin);
                         }
                     }
@@ -88,19 +90,19 @@ public class Main extends JavaPlugin implements Listener {
             if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
                 if (sender instanceof ConsoleCommandSender) {
                     Main.this.reloadConfig();
-                    sender.sendMessage(this.convert(this.getConfig().getString("reload")));
+                    sender.sendMessage(this.convert(this.getConfig().getString("Message.Reload")));
                 }
                 if (sender instanceof Player) {
 
                     Player player = (Player) sender;
 
                     if (!sender.hasPermission("souls.admin")) {
-                        sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                     }
 
                     if (sender.hasPermission("souls.admin")) {
                         Main.this.reloadConfig();
-                        sender.sendMessage(this.convert(this.getConfig().getString("reload")));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Reload")));
                     }
                 }
             }
@@ -108,19 +110,19 @@ public class Main extends JavaPlugin implements Listener {
             if (args.length == 2 && args[0].equalsIgnoreCase("check")) {
                 if (sender instanceof ConsoleCommandSender) {
                     if (Bukkit.getPlayer(args[1]) == null) {
-                        sender.sendMessage(this.convert(this.getConfig().getString("not-online")));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
                         return true;
                     }
 
-                    sender.sendMessage(this.convert(this.getConfig().getString("check-message")).replaceAll("%souls%",  String.valueOf(this.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    sender.sendMessage(this.convert(this.getConfig().getString("Message.Check-message")).replaceAll("%souls%", String.valueOf(this.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                 }
                 if (sender instanceof Player) {
                     if (Bukkit.getPlayer(args[1]) == null) {
-                        sender.sendMessage(this.convert(this.getConfig().getString("not-online")));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
                         return true;
                     }
 
-                    sender.sendMessage(this.convert(this.getConfig().getString("check-message")).replaceAll("%souls%",  String.valueOf(this.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    sender.sendMessage(this.convert(this.getConfig().getString("Message.Check-message")).replaceAll("%souls%", String.valueOf(this.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                 }
             }
 
@@ -128,11 +130,11 @@ public class Main extends JavaPlugin implements Listener {
                 if (args[0].equalsIgnoreCase("add")) {
                     if (sender instanceof ConsoleCommandSender) {
                         if (Bukkit.getPlayer(args[1]) == null) {
-                            sender.sendMessage(this.convert(this.getConfig().getString("not-online")));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
                             return true;
                         }
                         this.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(this.convert(this.getConfig().getString("add-message")).replaceAll("%souls%",  String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Add-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
 
                     }
 
@@ -141,12 +143,12 @@ public class Main extends JavaPlugin implements Listener {
                         Player player = (Player) sender;
 
                         if (!sender.hasPermission("souls.admin")) {
-                            sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         }
 
                         if (sender.hasPermission("souls.admin")) {
                             this.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                            sender.sendMessage(this.convert(this.getConfig().getString("add-message")).replaceAll("%souls%",  String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Add-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                         }
                     }
                 }
@@ -154,36 +156,36 @@ public class Main extends JavaPlugin implements Listener {
                 if (args[0].equalsIgnoreCase("remove")) {
                     if (sender instanceof ConsoleCommandSender) {
                         if (Bukkit.getPlayer(args[1]) == null) {
-                            sender.sendMessage(this.convert(this.getConfig().getString("not-online")));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
                             return true;
                         }
                         if (this.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
-                            sender.sendMessage(this.convert(this.getConfig().getString("enough")));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Enough")));
                             return true;
                         }
 
                         this.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(this.convert(this.getConfig().getString("take-message")).replaceAll("%souls%",  String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                     }
 
                     if (sender instanceof Player) {
 
                         Player player = (Player) sender;
                         if (!sender.hasPermission("souls.admin")) {
-                            sender.sendMessage(this.convert(this.getConfig().getString("soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
                         }
                         if (sender.hasPermission("souls.admin")) {
                             if (Bukkit.getPlayer(args[1]) == null) {
-                                sender.sendMessage(this.convert(this.getConfig().getString("not-online")));
+                                sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
                                 return true;
                             }
                             if (this.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
-                                sender.sendMessage(this.convert(this.getConfig().getString("enough")));
+                                sender.sendMessage(this.convert(this.getConfig().getString("Message.Enough")));
                                 return true;
                             }
 
                             this.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                            sender.sendMessage(this.convert(this.getConfig().getString("take-message")).replaceAll("%souls%",  String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                         }
                     }
                 }
@@ -196,8 +198,9 @@ public class Main extends JavaPlugin implements Listener {
     public void onLoad() {
         this.saveDefaultConfig();
     }
+
     public void onEnable() {
-        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
         }
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
@@ -217,8 +220,8 @@ public class Main extends JavaPlugin implements Listener {
             public void run() {
                 Iterator var2 = Bukkit.getOnlinePlayers().iterator();
 
-                while(var2.hasNext()) {
-                    Player p = (Player)var2.next();
+                while (var2.hasNext()) {
+                    Player p = (Player) var2.next();
                     if (!p.hasPermission("souls.use")) {
                         return;
                     }
@@ -226,7 +229,7 @@ public class Main extends JavaPlugin implements Listener {
                     List<String> w = Main.this.getConfig().getStringList("available-worlds");
                     if (w.contains(p.getWorld().getName())) {
                         if (!Main.data.getConfig().contains("Lives." + p.getUniqueId())) {
-                            Main.this.addLives(p, Main.this.getConfig().getInt("default-amount-souls"));
+                            Main.this.addLives(p, Main.this.getConfig().getInt("General.Default-amount-souls"));
                         }
                     }
                 }
@@ -237,26 +240,26 @@ public class Main extends JavaPlugin implements Listener {
             public void run() {
                 Iterator var2 = Bukkit.getOnlinePlayers().iterator();
 
-                while(var2.hasNext()) {
-                    Player p = (Player)var2.next();
+                while (var2.hasNext()) {
+                    Player p = (Player) var2.next();
                     int sie = Main.this.getLives(p);
                     if (!p.hasPermission("souls.use")) {
                         return;
                     }
 
-                    if (Main.this.getConfig().getInt("default-amount-souls") <= sie) {
+                    if (Main.this.getConfig().getInt("General.Default-amount-souls") <= sie) {
                         return;
                     }
 
                     List<String> w = Main.this.getConfig().getStringList("available-worlds");
                     if (w.contains(p.getWorld().getName())) {
                         Main.this.addLives(p, 1);
-                        p.sendMessage(Main.this.convert(Main.this.getConfig().getString("soul-earn-message")));
+                        p.sendMessage(Main.this.convert(Main.this.getConfig().getString("Message.Soul-earn-message")));
                     }
                 }
 
             }
-        }).runTaskTimer(this, (long)(this.getConfig().getInt("daily-souls") * 20), (long)(this.getConfig().getInt("daily-souls") * 20));
+        }).runTaskTimer(this, (long) (this.getConfig().getInt("General.Daily-souls") * 20), (long) (this.getConfig().getInt("General.Daily-souls") * 20));
     }
 
     public String convert(String s) {
@@ -265,20 +268,30 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void death(PlayerDeathEvent e) {
-        final Player p = e.getEntity();
+        Player p = e.getEntity();
+        Player k = p.getKiller();
         List<String> w = this.getConfig().getStringList("available-worlds");
         if (w.contains(p.getWorld().getName())) {
             if (p.hasPermission("souls.use")) {
-                this.removeLives(p, 1);
+                this.removeLives(p, this.getConfig().getInt("General.Death-souls"));
+                if (!this.getConfig().getBoolean("PVP.Enable")) {
+                    return;
+                }
+                if (this.getConfig().getBoolean("PVP.Enable")) {
+                    if (k instanceof Player) {
+                        this.addLives(k, this.getConfig().getInt("PVP.Kill-souls"));
+                        k.sendMessage(Main.this.convert(Main.this.getConfig().getString("PVP.Kill-message")));
+                    }
+                }
                 if (this.getLives(p) >= 1) {
                     (new BukkitRunnable() {
                         public void run() {
                             if (p.isOnline() && p != null) {
-                                p.sendMessage(Main.this.convert(Main.this.getConfig().getString("death-message")).replaceAll("%souls%", String.valueOf(Main.this.getLives(p))));
+                                p.sendMessage(Main.this.convert(Main.this.getConfig().getString("Message.Death-message")).replaceAll("%souls%", String.valueOf(Main.this.getLives(p))));
                             }
 
                         }
-                    }).runTaskLater(this, (long)(20 * this.getConfig().getInt("lose-soul-message-after")));
+                    }).runTaskLater(this, (long) (20 * this.getConfig().getInt("Message.Lose-soul-message-after")));
                 }
 
                 if (this.getLives(p) > 0) {
@@ -286,19 +299,26 @@ public class Main extends JavaPlugin implements Listener {
                 }
 
                 if (this.getLives(p) <= 0) {
-                    this.addLives(p, this.getConfig().getInt("default-amount-souls"));
+                    this.addLives(p, this.getConfig().getInt("General.Default-amount-souls"));
                     e.setKeepInventory(false);
                     (new BukkitRunnable() {
                         public void run() {
                             if (p.isOnline() && p != null) {
-                                p.sendMessage(Main.this.convert(Main.this.getConfig().getString("death-message-inventory")).replaceAll("%souls%", String.valueOf(Main.this.getLives(p))));
+                                p.sendMessage(Main.this.convert(Main.this.getConfig().getString("Message.Death-message-inventory")).replaceAll("%souls%", String.valueOf(Main.this.getLives(p))));
                             }
 
                         }
-                    }).runTaskLater(this, (long)(20 * this.getConfig().getInt("lose-soul-message-after")));
+                    }).runTaskLater(this, (long) (20 * this.getConfig().getInt("General.Lose-soul-message-after")));
                 }
 
             }
         }
+    }
+
+    @Override
+    public void onDisable() {
+        this.getLogger().info("Saving data....");
+        this.saveConfig();
+        this.data.save();
     }
 }

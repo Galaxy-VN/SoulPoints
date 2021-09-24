@@ -2,25 +2,34 @@ available-worlds:
   - world
   - world_nether
   - world_the_end
-default-amount-souls: 5
-daily-souls: 60
-lose-soul-message-after: 3
-soul-earn-message: '&d[Souls] &fYou have earned 1 Soul!'
-death-message: '&d[Souls] &fYou have lost 1 Soul, You have %souls% Souls Now!'
-death-message-inventory: '&4[Souls] &cYou have lost all of your souls, your inventory
-  has been dropped!'
-take-message: '&4[Souls] &cRemove %souls% souls from %player%'
-add-message: '&4[Souls] &cAdd %souls% souls to %player%'
-check-message: '&4[Souls] &c%player% has %souls%'
-soul-message: '&d[Souls] &fYou have %souls% souls!'
-not-online: '&d[Souls] &cThat player is not online!'
-enough: '&d[Souls] &cToo much amount to remove!'
-reload: '&d[Souls] &cReload Config'
-help-player:
+  - sinhton
+  - sinhton_nether
+  - sinhton_the_end
+PVP:
+  Enable: true
+  Kill-souls: 1
+  Kill-message: '&d[Souls] &bYou receive 1 Souls because you killed other player'
+General:
+  Default-amount-souls: 10
+  Death-souls: 2
+  Daily-souls: 60
+  Lose-soul-message-after: 3
+Message:
+  Soul-earn-message: '&d[Souls] &fYou have earned 1 Soul!'
+  Death-message: '&d[Souls] &fYou have lost 2 Soul, You have %souls% Souls Now!'
+  Death-message-inventory: '&4[Souls] &cYou have lost all of your souls, your inventory has been dropped!'
+  Take-message: '&4[Souls] &cRemove %souls% souls from %player%'
+  Add-message: '&4[Souls] &cAdd %souls% souls to %player%'
+  Check-message: '&4[Souls] &c%player% has %souls%'
+  Soul-message: '&d[Souls] &fYou have %souls% souls!'
+  Not-online: '&d[Souls] &cThat player is not online!'
+  Enough: '&d[Souls] &cToo much amount to remove!'
+  Reload: '&d[Souls] &cReload Config'
+Help-player:
   - "&a/souls check <player> &f- &7Check souls of player"
-help-admin:
+Help-admin:
   - "§a/souls check <player> §f- §7Check souls of player"
   - "§a/souls add <player> <amount> §f- §7Add souls "
   - "§a/souls remove <player> <amount> §f- §7Remove souls"
   - "§a/souls reload §f- §7Reload Config"
-config-version: 3
+config-version: 4
