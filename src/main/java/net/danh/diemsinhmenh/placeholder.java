@@ -39,7 +39,7 @@ public class placeholder extends PlaceholderExpansion {
             return "Player not online";
 
         switch (identifier) {
-            case "live":
+            case "amount":
                 return String.valueOf(plugin.getLives(p));
         }
 
