@@ -2,9 +2,6 @@ available-worlds:
   - world
   - world_nether
   - world_the_end
-  - sinhton
-  - sinhton_nether
-  - sinhton_the_end
 PVP:
   Enable: true
   Kill-souls: 1
