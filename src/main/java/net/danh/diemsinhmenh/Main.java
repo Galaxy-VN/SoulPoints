@@ -5,6 +5,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -22,7 +25,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin implements Listener {
     public static data data;
-
 
     private void createConfig() {
         try {
@@ -230,10 +232,20 @@ public class Main extends JavaPlugin implements Listener {
                     if (w.contains(p.getWorld().getName())) {
                         if (!Main.data.getConfig().contains("Lives." + p.getUniqueId())) {
                             Main.this.addLives(p, Main.this.getConfig().getInt("General.Default-amount-souls"));
+
+                        }
+
+                        if (!getConfig().getBoolean("ActionBar.Enable")) {
+                            return;
+                        }
+                        if (getConfig().getBoolean("ActionBar.Enable")) {
+                            p.spigot().sendMessage(
+                                    ChatMessageType.ACTION_BAR,
+                                    new TextComponent(Main.this.convert(Main.this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(getLives(p)))));
                         }
                     }
-                }
 
+                }
             }
         }).runTaskTimer(this, 20L, 20L);
         (new BukkitRunnable() {
@@ -299,7 +311,7 @@ public class Main extends JavaPlugin implements Listener {
                 }
 
                 if (this.getLives(p) <= 0) {
-                    this.addLives(p, this.getConfig().getInt("General.Default-amount-souls"));
+                    this.addLives(p, this.getConfig().getInt("General.Respawn_souls"));
                     e.setKeepInventory(false);
                     (new BukkitRunnable() {
                         public void run() {

@@ -6,10 +6,13 @@ PVP:
   Enable: true
   Kill-souls: 1
   Kill-message: '&d[Souls] &bYou receive 1 Souls because you killed other player'
+ActionBar:
+  Enable: true
 General:
-  Default-amount-souls: 10
-  Death-souls: 2
+  Default-amount-souls: 7
+  Death-souls: 1
   Daily-souls: 60
+  Respawn_souls: 3
   Lose-soul-message-after: 3
 Message:
   Soul-earn-message: '&d[Souls] &fYou have earned 1 Soul!'
