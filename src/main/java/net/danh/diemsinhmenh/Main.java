@@ -191,6 +191,31 @@ public class Main extends JavaPlugin implements Listener {
                         }
                     }
                 }
+                if (args[0].equalsIgnoreCase("set")) {
+                    if (sender instanceof ConsoleCommandSender) {
+                        if (Bukkit.getPlayer(args[1]) == null) {
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Not-online")));
+                            return true;
+                        }
+                        this.setLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
+                        sender.sendMessage(this.convert(this.getConfig().getString("Message.Set-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+
+                    }
+
+                    if (sender instanceof Player) {
+
+                        Player player = (Player) sender;
+
+                        if (!sender.hasPermission("souls.admin")) {
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Soul-message")).replaceAll("%souls%", String.valueOf(this.getLives(player))));
+                        }
+
+                        if (sender.hasPermission("souls.admin")) {
+                            this.setLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
+                            sender.sendMessage(this.convert(this.getConfig().getString("Message.Set-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        }
+                    }
+                }
             }
         }
         return true;

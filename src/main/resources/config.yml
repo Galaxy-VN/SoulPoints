@@ -20,6 +20,7 @@ Message:
   Death-message-inventory: '&4[Souls] &cYou have lost all of your souls, your inventory has been dropped!'
   Take-message: '&4[Souls] &cRemove %souls% souls from %player%'
   Add-message: '&4[Souls] &cAdd %souls% souls to %player%'
+  Set-message: '&4[Souls] &cSet %souls% souls to %player%'
   Check-message: '&4[Souls] &c%player% has %souls%'
   Soul-message: '&d[Souls] &fYou have %souls% souls!'
   Not-online: '&d[Souls] &cThat player is not online!'
@@ -31,5 +32,6 @@ Help-admin:
   - "§a/souls check <player> §f- §7Check souls of player"
   - "§a/souls add <player> <amount> §f- §7Add souls "
   - "§a/souls remove <player> <amount> §f- §7Remove souls"
+  - "§a/souls set <player> <amount> §f- §7Set souls"
   - "§a/souls reload §f- §7Reload Config"
 config-version: 4
