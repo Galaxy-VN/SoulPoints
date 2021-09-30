@@ -1,3 +1,4 @@
+DropRandomItems: true #If you dont want lost random item, use SoulPoints v1.2.3
 available-worlds:
   - world
   - world_nether
@@ -17,7 +18,7 @@ General:
 Message:
   Soul-earn-message: '&d[Souls] &fYou have earned 1 Soul!'
   Death-message: '&d[Souls] &fYou have lost 2 Soul, You have %souls% Souls Now!'
-  Death-message-inventory: '&4[Souls] &cYou have lost all of your souls, your inventory has been dropped!'
+  Death-message-inventory: '&4[Souls] &cYou have lost random item because you do not enough souls to keep it!'
   Take-message: '&4[Souls] &cRemove %souls% souls from %player%'
   Add-message: '&4[Souls] &cAdd %souls% souls to %player%'
   Set-message: '&4[Souls] &cSet %souls% souls to %player%'

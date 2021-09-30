@@ -1,5 +1,5 @@
 name: SoulPoints
-version: '1.2.3'
+version: '1.2.4'
 main: net.danh.diemsinhmenh.Main
 softdepend: [ PlaceholderAPI ]
 authors: [ VoChiDanh ]
