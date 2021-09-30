@@ -1,4 +1,4 @@
-DropRandomItems: true #If you dont want lost random item, use SoulPoints v1.2.3
+DropRandomItems: true #false to lost all inventory
 available-worlds:
   - world
   - world_nether

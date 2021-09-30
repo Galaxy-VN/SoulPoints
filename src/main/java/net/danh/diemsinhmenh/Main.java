@@ -360,10 +360,10 @@ public class Main extends JavaPlugin implements Listener {
                     this.addLives(p, this.getConfig().getInt("General.Respawn_souls"));
                     if (this.getConfig().getBoolean("DropRandomItems")) {
                         ItemStack itemStack = new ItemStack(playerInventory.getItem(((Integer) fullSlots.get(theSlot)).intValue()));
-                        Location l = p.getLocation();
-                        p.getWorld().dropItemNaturally(l, itemStack);
-                    } else {
                         playerInventory.setItem(((Integer) fullSlots.get(theSlot)).intValue(), null);
+                    }
+                    if (!this.getConfig().getBoolean("DropRandomItems")) {
+                        e.setKeepInventory(false);
                     }
                     (new BukkitRunnable() {
                         public void run() {
