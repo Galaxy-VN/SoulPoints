@@ -9,6 +9,7 @@ import java.util.Random;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -234,6 +235,7 @@ public class Main extends JavaPlugin implements Listener {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
         }
+        Metrics metrics = new Metrics(this, 12918);
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
         FileConfiguration config = this.getConfig();
         config.options().copyDefaults(true);
