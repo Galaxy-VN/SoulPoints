@@ -1,9 +1,9 @@
-name: SoulPoints
+name: '${project.name}'
 version: '${project.version}'
 main: net.danh.diemsinhmenh.Main
 softdepend: [ PlaceholderAPI ]
 authors: [ VoChiDanh ]
-description: SoulPoints for player
+description: '${project.description}'
 commands:
   souls:
     description: help command
