@@ -84,7 +84,7 @@ public class Main extends JavaPlugin implements Listener {
         }
         Metrics metrics = new Metrics(this, 12918);
         getCommand("souls").setExecutor(new commands(this));
-        Bukkit.getServer().getPluginManager().registerEvents(this, this);
+        Bukkit.getServer().getPluginManager().registerEvents(new death(this), this);
         FileConfiguration config = this.getConfig();
         config.options().copyDefaults(true);
         this.saveConfig();
