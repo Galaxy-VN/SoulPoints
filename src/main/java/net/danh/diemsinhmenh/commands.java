@@ -30,7 +30,7 @@ public class commands implements CommandExecutor {
                     if (!sender.hasPermission("souls.admin")) {
                         sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
                         sender.sendMessage("");
-                        sender.sendMessage(main.convert(main.getConfig().getString("Help-player")));
+                        for (String helpplayer : main.getConfig().getStringList("Help-player"));
                     }
                     if (sender.hasPermission("souls.admin")) {
                         for (String helpadmin : main.getConfig().getStringList("Help-admin")) {
