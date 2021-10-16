@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.head_commit.message, '[v1.2.5-R2]')
+    if: contains(github.event.head_commit.message, '[Release]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v1.2.5"
+          automatic_release_tag: "v1.2.6"
           prerelease: false
           title: "Development Build"
           files: |
