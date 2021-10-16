@@ -1,5 +1,6 @@
-package net.danh.diemsinhmenh;
+package net.danh.diemsinhmenh.event;
 
+import net.danh.diemsinhmenh.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

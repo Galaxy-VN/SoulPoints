@@ -1,5 +1,6 @@
-package net.danh.diemsinhmenh;
+package net.danh.diemsinhmenh.commands;
 
+import net.danh.diemsinhmenh.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

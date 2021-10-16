@@ -1,4 +1,4 @@
-package net.danh.diemsinhmenh;
+package net.danh.diemsinhmenh.event;
 
 import java.io.File;
 import java.io.IOException;
