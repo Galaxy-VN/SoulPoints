@@ -17,6 +17,7 @@ General:
   Respawn_souls: 3
   Lose-soul-message-after: 3
   First_join: 5
+  Minimum_souls: 1
 lang:
   enUs:
     Soul-earn-message: '&d[Souls] &fYou have earned %souls% Soul!'

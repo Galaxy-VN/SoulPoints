@@ -58,11 +58,11 @@ public class death implements Listener {
                     }).runTaskLater(main, (long) (20 * main.getConfig().getInt("General.Lose-soul-message-after")));
                 }
 
-                if (main.getLives(p) > 0) {
+                if (main.getLives(p) > main.getConfig().getInt("General.Minimum_souls")) {
                     e.setKeepInventory(true);
                 }
 
-                if (main.getLives(p) < 1) {
+                if (main.getLives(p) < main.getConfig().getInt("General.Minimum_souls")) {
                     main.addLives(p, main.getConfig().getInt("General.Respawn_souls"));
                     if (main.getConfig().getBoolean("DropRandomItems")) {
                         List<Integer> fullSlots = new ArrayList<Integer>();
