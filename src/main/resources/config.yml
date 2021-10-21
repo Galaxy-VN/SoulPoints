@@ -1,4 +1,3 @@
-config-version: 6
 DropRandomItems: true #false to lost all inventory
 language: enUs
 available-worlds:
@@ -19,3 +18,52 @@ General:
   Lose-soul-message-after: 3
   First_join: 5
   Minimum_souls: 1
+lang:
+  enUs:
+    Soul-earn-message: '&d[Souls] &fYou have earned %souls% Soul!'
+    Death-message: '&d[Souls] &fYou lost %lost% souls because you dead, You have %souls% Souls Now!'
+    Death-message-inventory: '&4[Souls] &cYou have lost random item because you do not enough souls to keep it!'
+    Kill-message: '&d[Souls] &bYou receive %souls% Souls because you killed %player%'
+    Take-message: '&4[Souls] &cRemove %souls% souls from %player%'
+    Add-message: '&4[Souls] &cAdd %souls% souls to %player%'
+    Set-message: '&4[Souls] &cSet %souls% souls to %player%'
+    Check-message: '&4[Souls] &c%player% has %souls%'
+    Soul-message: '&d[Souls] &fYou have %souls% souls!'
+    Not-online: '&d[Souls] &cThat player is not online!'
+    Enough: '&d[Souls] &cToo much amount to remove!'
+    Reload: '&d[Souls] &cReload Config'
+  zhCN:
+    Soul-earn-message: '&d[Souls] &f你获得了 %souls% 灵魂点数!'
+    Death-message: '&d[Souls] &f你失去了 %lost% 点灵魂点数, 现在有 %souls% 灵魂点数剩余!'
+    Death-message-inventory: '&4[Souls] &c缺少足够灵魂点数, 背包内物品已随机掉落!'
+    Kill-message: '&d[Souls] &b你通过击杀玩家 %player% 获得了 %souls% 灵魂点数'
+    Take-message: '&4[Souls] &c你移除了玩家 %player% %souls% 点灵魂点数'
+    Add-message: '&4[Souls] &c给予玩家 %player% 了点 %souls%灵魂点数'
+    Set-message: '&4[Souls] &c将玩家 %player% 的灵魂点数设置为了 %souls%'
+    Check-message: '&4[Souls] &c%player% 拥有 %souls% 点灵魂点数'
+    Soul-message: '&d[Souls] &f你现在有 %souls% 灵魂点数!'
+    Not-online: '&d[Souls] &c玩家不在线!'
+    Enough: '&d[Souls] &c移除的灵魂点数过多!'
+    Reload: '&d[Souls] &c配置已重载'
+  viVN:
+    Soul-earn-message: '&d[Souls] &fBạn nhận được %souls% Souls!'
+    Death-message: '&d[Souls] &fBạn đã chết và mất %lost% souls, bạn còn %souls% Souls!'
+    Death-message-inventory: '&4[Souls] &cBạn đã bị mất đồ vì mất hết souls!'
+    Kill-message: '&d[Souls] &bBạn nhận được %souls% Souls vì bạn giết người chơi %player%'
+    Take-message: '&4[Souls] &cLoại bỏ %souls% souls từ %player%'
+    Add-message: '&4[Souls] &cThêm %souls% souls cho %player%'
+    Set-message: '&4[Souls] &cĐặt %souls% souls cho %player%'
+    Check-message: '&4[Souls] &c%player% có %souls%'
+    Soul-message: '&d[Souls] &fBạn có %souls% souls!'
+    Not-online: '&d[Souls] &cNgười chơi không hoạt động!'
+    Enough: '&d[Souls] &cKhông đủ để loại bỏ!'
+    Reload: '&d[Souls] &cTải lại config'
+Help-player:
+  - "&a/souls check <player> &f- &7Check souls of player"
+Help-admin:
+  - "§a/souls check <player> §f- §7Check souls of player"
+  - "§a/souls add <player> <amount> §f- §7Add souls "
+  - "§a/souls remove <player> <amount> §f- §7Remove souls"
+  - "§a/souls set <player> <amount> §f- §7Set souls"
+  - "§a/souls reload §f- §7Reload Config"
+config-version: 5
