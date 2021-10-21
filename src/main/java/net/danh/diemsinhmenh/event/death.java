@@ -84,7 +84,7 @@ public class death implements Listener {
                     (new BukkitRunnable() {
                         public void run() {
                             if (p.isOnline() && p != null) {
-                                p.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Death-message-inventory")).replace("%souls%", String.valueOf(main.getLives(p))));
+                                p.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Death-message-inventory")).replaceAll("%souls%", String.valueOf(main.getLives(p))));
                             }
 
                         }

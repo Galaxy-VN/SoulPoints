@@ -3,6 +3,7 @@ version: '${project.version}'
 main: net.danh.diemsinhmenh.Main
 softdepend: [ PlaceholderAPI ]
 authors: [ VoChiDanh ]
+api-version: 1.13
 description: '${project.description}'
 commands:
   souls:
