@@ -29,7 +29,7 @@ public class commands implements CommandExecutor {
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (!sender.hasPermission("souls.admin")) {
-                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
+                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(main.getLives(player))));
                         sender.sendMessage("");
                         for (String helpplayer : main.getConfig().getStringList("Help-player"));
                     }
@@ -51,7 +51,7 @@ public class commands implements CommandExecutor {
                     Player player = (Player) sender;
 
                     if (!sender.hasPermission("souls.admin")) {
-                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
+                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(main.getLives(player))));
                     }
 
                     if (sender.hasPermission("souls.admin")) {
@@ -68,7 +68,7 @@ public class commands implements CommandExecutor {
                         return true;
                     }
 
-                    sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Check-message")).replaceAll("%souls%", String.valueOf(main.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Check-message")).replace("%souls%", String.valueOf(main.getLives(Bukkit.getPlayer(args[1])))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                 }
                 if (sender instanceof Player) {
                     if (Bukkit.getPlayer(args[1]) == null) {
@@ -76,7 +76,7 @@ public class commands implements CommandExecutor {
                         return true;
                     }
 
-                    sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Check-message")).replaceAll("%souls%", String.valueOf(main.getLives(Bukkit.getPlayer(args[1])))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Check-message")).replace("%souls%", String.valueOf(main.getLives(Bukkit.getPlayer(args[1])))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                 }
             }
 
@@ -88,7 +88,7 @@ public class commands implements CommandExecutor {
                             return true;
                         }
                         main.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Add-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Add-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
 
                     }
 
@@ -97,12 +97,12 @@ public class commands implements CommandExecutor {
                         Player player = (Player) sender;
 
                         if (!sender.hasPermission("souls.admin")) {
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(main.getLives(player))));
                         }
 
                         if (sender.hasPermission("souls.admin")) {
                             main.addLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Add-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Add-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                         }
                     }
                 }
@@ -119,14 +119,14 @@ public class commands implements CommandExecutor {
                         }
 
                         main.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                     }
 
                     if (sender instanceof Player) {
 
                         Player player = (Player) sender;
                         if (!sender.hasPermission("souls.admin")) {
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(main.getLives(player))));
                         }
                         if (sender.hasPermission("souls.admin")) {
                             if (Bukkit.getPlayer(args[1]) == null) {
@@ -139,7 +139,7 @@ public class commands implements CommandExecutor {
                             }
 
                             main.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                         }
                     }
                 }
@@ -150,7 +150,7 @@ public class commands implements CommandExecutor {
                             return true;
                         }
                         main.setLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Set-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Set-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
 
                     }
 
@@ -159,12 +159,12 @@ public class commands implements CommandExecutor {
                         Player player = (Player) sender;
 
                         if (!sender.hasPermission("souls.admin")) {
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(main.getLives(player))));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(main.getLives(player))));
                         }
 
                         if (sender.hasPermission("souls.admin")) {
                             main.setLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Set-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                            sender.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Set-message")).replace("%souls%", String.valueOf(Integer.parseInt(args[2]))).replace("%player%", Bukkit.getPlayer(args[1]).getName()));
                         }
                     }
                 }

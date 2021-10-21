@@ -109,7 +109,7 @@ public class Main extends JavaPlugin implements Listener {
                         if (getConfig().getBoolean("ActionBar.Enable")) {
                             p.spigot().sendMessage(
                                     ChatMessageType.ACTION_BAR,
-                                    new TextComponent(Main.this.convert(Main.this.getConfig().getString("lang." + getConfig().getString("language") + "." + "Soul-message")).replaceAll("%souls%", String.valueOf(getLives(p)))));
+                                    new TextComponent(Main.this.convert(Main.this.getConfig().getString("lang." + getConfig().getString("language") + "." + "Soul-message")).replace("%souls%", String.valueOf(getLives(p)))));
                         }
                     }
 
@@ -134,7 +134,7 @@ public class Main extends JavaPlugin implements Listener {
                     List<String> w = Main.this.getConfig().getStringList("available-worlds");
                     if (w.contains(p.getWorld().getName())) {
                         Main.this.addLives(p, getConfig().getInt("General.Daily-souls"));
-                        p.sendMessage(Main.this.convert(Main.this.getConfig().getString("lang." + getConfig().getString("language") + "." + "Soul-earn-message")).replaceAll("%souls%", getConfig().getString("General.Daily-souls")));
+                        p.sendMessage(Main.this.convert(Main.this.getConfig().getString("lang." + getConfig().getString("language") + "." + "Soul-earn-message")).replace("%souls%", getConfig().getString("General.Daily-souls")));
                     }
                 }
 
@@ -143,7 +143,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String convert(String s) {
-        return s.replaceAll("&", "§");
+        return s.replace("&", "§");
     }
 
 
