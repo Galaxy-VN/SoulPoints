@@ -3,6 +3,7 @@
 ![issues](https://img.shields.io/github/issues/VoChiDanh/SoulPoints?label=Issues)
 ![workflow](https://img.shields.io/github/workflow/status/VoChiDanh/SoulPoints/Build%20&%20Upload?label=Dev%20Build)
 ![version](https://img.shields.io/spiget/version/96396?label=SpigotMC%20Version)
+![devversion](https://img.shields.io/github/release/VoChiDanh/SoulPoints.svg?label=Dev%20Build%20Version)
 
 # Information
 Want a soul point plugin? Here is a simple plugin for you!
