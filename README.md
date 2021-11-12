@@ -11,5 +11,5 @@ Want a soul point plugin? Here is a simple plugin for you!
 Every time you die with souls, you will not lose items and if you run out of souls when you die, you will lose items
 
 ## Downloads
-[SpigotMC](https://www.spigotmc.org/resources/soulpoints.96396/)<br>
+[SpigotMC](https://www.spigotmc.org/resources/soulpoints.96396/)  <br>
 [Dev Build](https://github.com/VoChiDanh/SoulPoints/releases)

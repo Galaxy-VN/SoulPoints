@@ -1,9 +1,12 @@
 package net.danh.diemsinhmenh.event;
 
 import net.danh.diemsinhmenh.Main;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -14,7 +17,6 @@ import java.util.List;
 import java.util.Random;
 
 public class death implements Listener {
-
 
 
     private Main main;
@@ -29,6 +31,25 @@ public class death implements Listener {
         Random r = new Random();
         int randomNumber = r.nextInt(max - min) + min;
         return randomNumber;
+    }
+
+
+    @EventHandler
+    public void onKill(EntityDeathEvent e) {
+        LivingEntity mob = e.getEntity();
+        Player player = e.getEntity().getKiller();
+        if (!main.getConfig().getBoolean("Mobs.Enable")) {
+            return;
+        }
+        if (main.getConfig().getBoolean("Mobs.Enable")) {
+            if (player instanceof Player) {
+                double chance = Math.random() * 100.0D;
+                if (chance <= main.getConfig().getInt("Mobs.Percent")) {
+                    main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
+                    player.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
+                }
+            }
+        }
     }
 
     @EventHandler

@@ -7,12 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.danh.diemsinhmenh.commands.commands;
+import net.danh.diemsinhmenh.event.UpdateChecker;
 import net.danh.diemsinhmenh.event.death;
 import net.danh.diemsinhmenh.hook.placeholder;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -34,6 +36,14 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("souls").setExecutor(new commands(this));
         getServer().getPluginManager().registerEvents(new death(this), this);
         createConfigs();
+        new UpdateChecker(this, 96396).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getLogger().info(ChatColor.GREEN + "There is not a new update available.");
+            } else {
+                getLogger().info(ChatColor.RED + "There is a new update available.");
+                getLogger().info(ChatColor.YELLOW + "Download: " + ChatColor.BLUE + "https://www.spigotmc.org/resources/96396/");
+            }
+        });
         (new BukkitRunnable() {
             public void run() {
                 Iterator var2 = Bukkit.getOnlinePlayers().iterator();
@@ -165,8 +175,6 @@ public class Main extends JavaPlugin implements Listener {
         getdata().set("Lives." + p.getUniqueId() + ".life", this.getLives(p) - number);
         save();
     }
-
-
 
     public String convert(String s) {
         return s.replaceAll("&", "§");
