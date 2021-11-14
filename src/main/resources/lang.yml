@@ -13,6 +13,7 @@ lang:
     Not-online: '&d[Souls] &cThat player is not online!'
     Enough: '&d[Souls] &cToo much amount to remove!'
     Reload: '&d[Souls] &cReload Config'
+    Perm: '&d[Souls] &cYou can not do this command'
   zhCN:
     Soul-earn-message: '&d[Souls] &f你获得了 %souls% 灵魂点数!'
     Death-message: '&d[Souls] &f你失去了 %lost% 点灵魂点数, 现在有 %souls% 灵魂点数剩余!'
@@ -27,6 +28,7 @@ lang:
     Not-online: '&d[Souls] &c玩家不在线!'
     Enough: '&d[Souls] &c移除的灵魂点数过多!'
     Reload: '&d[Souls] &c配置已重载'
+    Perm: '&d[Souls] &c你不能执行这个命令'
   viVN:
     Soul-earn-message: '&d[Souls] &fBạn nhận được %souls% Souls!'
     Death-message: '&d[Souls] &fBạn đã chết và mất %lost% souls, bạn còn %souls% Souls!'
@@ -41,6 +43,7 @@ lang:
     Not-online: '&d[Souls] &cNgười chơi không hoạt động!'
     Enough: '&d[Souls] &cKhông đủ để loại bỏ!'
     Reload: '&d[Souls] &cTải lại config'
+    Perm: '&d[Souls] &cBạn không thể thực hiện lệnh đó'
 Help-player:
   - "&a/souls check <player> &f- &7Check souls of player"
 Help-admin:
