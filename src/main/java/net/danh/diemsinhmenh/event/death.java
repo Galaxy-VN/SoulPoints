@@ -35,24 +35,6 @@ public class death implements Listener {
 
 
     @EventHandler
-    public void onKill(EntityDeathEvent e) {
-        LivingEntity mob = e.getEntity();
-        Player player = e.getEntity().getKiller();
-        if (!main.getConfig().getBoolean("Mobs.Enable")) {
-            return;
-        }
-        if (main.getConfig().getBoolean("Mobs.Enable")) {
-            if (player instanceof Player) {
-                double chance = Math.random() * 100.0D;
-                if (chance <= main.getConfig().getInt("Mobs.Percent")) {
-                    main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
-                    player.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
-                }
-            }
-        }
-    }
-
-    @EventHandler
     public void death(PlayerDeathEvent e) {
         Player p = e.getEntity();
         Player k = p.getKiller();

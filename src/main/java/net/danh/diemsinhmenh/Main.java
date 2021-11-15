@@ -178,6 +178,6 @@ public class Main extends JavaPlugin implements Listener {
 
     public String convert(String s) {
         return s.replaceAll("&", "§");
-    }
+    } // TODO: FIX COLOR
 
 }
