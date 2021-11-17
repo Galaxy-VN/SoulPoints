@@ -14,11 +14,6 @@ public class commands implements CommandExecutor {
 
 
     private Main main;
-    private net.danh.diemsinhmenh.event.death death;
-
-    public commands(net.danh.diemsinhmenh.event.death death) {
-        this.death = death;
-    }
 
 
     public commands(Main main) {
