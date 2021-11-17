@@ -2,6 +2,9 @@ package net.danh.diemsinhmenh.event;
 
 import net.danh.diemsinhmenh.Main;
 import org.bukkit.ChatColor;
+import org.bukkit.Server;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,7 +21,6 @@ import java.util.Random;
 
 public class death implements Listener {
 
-
     private Main main;
 
 
@@ -33,6 +35,20 @@ public class death implements Listener {
         return randomNumber;
     }
 
+    @EventHandler
+    public void onKill(EntityDeathEvent e) {
+        LivingEntity mob = e.getEntity();
+        Player player = e.getEntity().getKiller();
+        if (!main.getConfig().getBoolean("Mobs.Enable")) {
+            return;
+        }
+        if (main.getConfig().getBoolean("Mobs.Enable")) {
+            if (player instanceof Player) {
+                main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
+                player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
+                }
+            }
+        }
 
     @EventHandler
     public void death(PlayerDeathEvent e) {
@@ -48,14 +64,14 @@ public class death implements Listener {
                 if (main.getConfig().getBoolean("PVP.Enable")) {
                     if (k instanceof Player) {
                         main.addLives(k, main.getConfig().getInt("PVP.Kill-souls"));
-                        k.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Kill-message")).replace("%souls%", main.getConfig().getString("PVP.Kill-souls")).replace("%player%", p.getDisplayName()));
+                        k.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-message")).replace("%souls%", main.getConfig().getString("PVP.Kill-souls")).replace("%player%", p.getDisplayName()));
                     }
                 }
                 if (main.getLives(p) >= 1) {
                     (new BukkitRunnable() {
                         public void run() {
                             if (p.isOnline() && p != null) {
-                                p.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Death-message")).replace("%souls%", String.valueOf(main.getLives(p))).replace("%lost%", main.getConfig().getString("General.Death-souls")));
+                                p.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Death-message")).replace("%souls%", String.valueOf(main.getLives(p))).replace("%lost%", main.getConfig().getString("General.Death-souls")));
                             }
 
                         }
@@ -87,7 +103,7 @@ public class death implements Listener {
                     (new BukkitRunnable() {
                         public void run() {
                             if (p.isOnline() && p != null) {
-                                p.sendMessage(main.convert(main.getConfig().getString("lang." + main.getConfig().getString("language") + "." + "Death-message-inventory")).replaceAll("%souls%", String.valueOf(main.getLives(p))));
+                                p.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Death-message-inventory")).replaceAll("%souls%", String.valueOf(main.getLives(p))));
                             }
 
                         }

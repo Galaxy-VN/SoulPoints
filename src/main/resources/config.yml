@@ -8,6 +8,10 @@ available-worlds:
 PVP:
   Enable: true
   Kill-souls: 1
+Mobs:
+  Enable: true
+  Percent: 100
+  Amount: 1
 ActionBar:
   Enable: true
 General:

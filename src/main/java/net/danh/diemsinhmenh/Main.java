@@ -15,6 +15,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin implements Listener {
         }
         Metrics metrics = new Metrics(this, 12918);
         getCommand("souls").setExecutor(new commands(this));
+        getCommand("souls").setTabCompleter((TabCompleter) this);
         getServer().getPluginManager().registerEvents(new death(this), this);
         createConfigs();
         new UpdateChecker(this, 96396).getVersion(version -> {
@@ -177,7 +179,7 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     public String convert(String s) {
-        return s.replaceAll("&", "§");
-    } // TODO: FIX COLOR
+        return s.replace("&", "§");
+    }
 
 }
