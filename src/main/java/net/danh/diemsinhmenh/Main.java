@@ -25,6 +25,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin implements Listener {
@@ -34,11 +35,12 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
 
         // registering here so the stats will load with the templates
-        if (Bukkit.getPluginManager().getPlugin("MythicMobs") != null) {
+        PluginManager manager = getServer().getPluginManager();
+        if (manager.isPluginEnabled("MythicMobs")) {
             getLogger().log(Level.INFO, "Hooked onto MythicMobs");
         }
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if (manager.isPluginEnabled("PlaceholderAPI")) {
             new placeholder(this).register();
             getLogger().log(Level.INFO, "Hooked onto PlaceholderAPI");
         }
