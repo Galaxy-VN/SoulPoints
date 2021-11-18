@@ -5,7 +5,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,12 +45,20 @@ public class death implements Listener {
             return;
         }
         if (main.getConfig().getBoolean("Mobs.Enable")) {
-            if (player instanceof Player) {
-                main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
-                player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
+            if (mob instanceof Animals) {
+                return;
+            }
+            if (mob instanceof Monster) {
+                if (player instanceof Player) {
+                    double chance = Math.random() * 100.0D;
+                    if (chance <= (main.getConfig().getInt("Mobs.Percent"))) {
+                        main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
+                        player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
+                    }
                 }
             }
         }
+    }
 
     @EventHandler
     public void death(PlayerDeathEvent e) {
