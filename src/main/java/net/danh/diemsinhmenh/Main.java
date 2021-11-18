@@ -3,9 +3,12 @@ package net.danh.diemsinhmenh;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
 
+import net.danh.diemsinhmenh.commands.TabComplete;
 import net.danh.diemsinhmenh.commands.commands;
 import net.danh.diemsinhmenh.event.UpdateChecker;
 import net.danh.diemsinhmenh.event.death;
@@ -30,12 +33,18 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+        // registering here so the stats will load with the templates
+        if (Bukkit.getPluginManager().getPlugin("MythicMobs") != null) {
+            getLogger().log(Level.INFO, "Hooked onto MythicMobs");
+        }
+
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new placeholder(this).register();
+            getLogger().log(Level.INFO, "Hooked onto PlaceholderAPI");
         }
         Metrics metrics = new Metrics(this, 12918);
         getCommand("souls").setExecutor(new commands(this));
-        getCommand("souls").setTabCompleter((TabCompleter) this);
+        getCommand("souls").setTabCompleter(new TabComplete());
         getServer().getPluginManager().registerEvents(new death(this), this);
         createConfigs();
         new UpdateChecker(this, 96396).getVersion(version -> {
@@ -108,27 +117,31 @@ public class Main extends JavaPlugin implements Listener {
         save();
     }
 
-    private File configFile, langFile, dataFile;
-    private FileConfiguration config, lang, data;
+    private File configFile, langFile, dataFile, mobFile;
+    private FileConfiguration config, lang, data, mob;
 
 
     public void createConfigs() {
         configFile = new File(getDataFolder(), "config.yml");
         langFile = new File(getDataFolder(), "lang.yml");
         dataFile = new File(getDataFolder(), "data.yml");
+        mobFile = new File(getDataFolder(), "mobs.yml");
 
         if (!configFile.exists()) saveResource("config.yml", false);
         if (!langFile.exists()) saveResource("lang.yml", false);
         if (!dataFile.exists()) saveResource("data.yml", false);
+        if (!mobFile.exists()) saveResource("mobs.yml", false);
 
         config = new YamlConfiguration();
         lang = new YamlConfiguration();
         data = new YamlConfiguration();
+        mob = new YamlConfiguration();
 
         try {
             config.load(configFile);
             lang.load(langFile);
             data.load(dataFile);
+            mob.load(mobFile);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -146,10 +159,15 @@ public class Main extends JavaPlugin implements Listener {
         return data;
     }
 
+    public FileConfiguration getmob() {
+        return mob;
+    }
+
     public void reloadConfigs() {
         config = YamlConfiguration.loadConfiguration(configFile);
         lang = YamlConfiguration.loadConfiguration(langFile);
         data = YamlConfiguration.loadConfiguration(dataFile);
+        mob = YamlConfiguration.loadConfiguration(mobFile);
     }
 
     public void save() {

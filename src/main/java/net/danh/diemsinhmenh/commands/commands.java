@@ -10,7 +10,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 
-public class commands implements CommandExecutor {
+public class commands implements CommandExecutor  {
 
 
     private Main main;
@@ -19,7 +19,6 @@ public class commands implements CommandExecutor {
     public commands(Main main) {
         this.main = main;
     }
-
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("souls")) {

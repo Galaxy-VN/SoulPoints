@@ -1,4 +1,4 @@
-config-version: 6
+config-version: 7
 DropRandomItems: true #false to lost all inventory
 language: enUs
 available-worlds:
@@ -10,8 +10,7 @@ PVP:
   Kill-souls: 1
 Mobs:
   Enable: true
-  Percent: 100
-  Amount: 1
+  KillType: Vanilla #Vanilla/MythicMobs
 ActionBar:
   Enable: true
 General:

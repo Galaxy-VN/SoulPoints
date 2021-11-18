@@ -11,7 +11,7 @@
 
     <name>SoulPoints</name>
 
-    <description>SoulsPoint for player</description>
+    <description>Every time you die with souls, you will not lose items and if you run out of souls when you die, you will lose items</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,6 +70,10 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>lumine-repo</id>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -83,6 +87,12 @@
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.10</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>MythicMobs-Dist</artifactId>
+            <version>5.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

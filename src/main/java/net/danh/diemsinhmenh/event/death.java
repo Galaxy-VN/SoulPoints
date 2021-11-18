@@ -1,14 +1,16 @@
 package net.danh.diemsinhmenh.event;
 
+import io.lumine.xikage.mythicmobs.MythicMobs;
+import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMobDeathEvent;
+import io.lumine.xikage.mythicmobs.mobs.MythicMob;
+import io.lumine.xikage.mythicmobs.mobs.entities.MythicEntity;
 import net.danh.diemsinhmenh.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -19,7 +21,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.logging.Level;
 
 public class death implements Listener {
 
@@ -39,26 +43,66 @@ public class death implements Listener {
 
     @EventHandler
     public void onKill(EntityDeathEvent e) {
-        LivingEntity mob = e.getEntity();
-        Player player = e.getEntity().getKiller();
-        if (!main.getConfig().getBoolean("Mobs.Enable")) {
-            return;
-        }
         if (main.getConfig().getBoolean("Mobs.Enable")) {
-            if (mob instanceof Animals) {
-                return;
-            }
-            if (mob instanceof Monster) {
-                if (player instanceof Player) {
-                    double chance = Math.random() * 100.0D;
-                    if (chance <= (main.getConfig().getInt("Mobs.Percent"))) {
-                        main.addLives(player, main.getConfig().getInt("Mobs.Amount"));
-                        player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", main.getConfig().getString("Mobs.Amount")).replace("%mob%", mob.getName()));
+            if (Objects.requireNonNull(main.getConfig().getString("Mobs.KillType")).equalsIgnoreCase("Vanilla")) {
+                LivingEntity mob = e.getEntity();
+                Player player = (Player) mob.getKiller();
+                String vanillamobs = e.getEntityType().toString();
+                Random randomInt = new Random();
+                int max = main.getmob().getInt("Vanilla.Default.max");
+                int min = main.getmob().getInt("Vanilla.Default.min");
+                int chance = main.getmob().getInt("Vanilla.Default.chance");
+                for (String getEntityType : main.getmob().getConfigurationSection("Vanilla.").getKeys(false)) {
+                    if (vanillamobs.equalsIgnoreCase(getEntityType)) {
+                        max = main.getmob().getInt("Vanilla." + vanillamobs + ".max");
+                        min = main.getmob().getInt("Vanilla." + vanillamobs + ".min");
+                        chance = main.getmob().getInt("Vanilla." + vanillamobs + ".chance");
+                        break;
                     }
+                }
+                max = max - min;
+                int random = min + randomInt.nextInt(max);
+                double chancee = Math.random() * 100.0D;
+                if (chancee <= chance) {
+                    main.addLives(player, random);
+                    player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", Integer.toString(random)).replace("%mob%", mob.getName()));
                 }
             }
         }
     }
+    @EventHandler
+    public void onkillmm(MythicMobDeathEvent mme) {
+        if (main.getConfig().getBoolean("Mobs.Enable")) {
+            if (Objects.requireNonNull(main.getConfig().getString("Mobs.KillType")).equalsIgnoreCase("MythicMobs")) {
+                MythicEntity mmob = mme.getMobType().getMythicEntity();
+                Player p = (Player) mme.getKiller();
+                String mobname = mme.getMobType().getInternalName();
+
+                int max = main.getmob().getInt("MythicMobs.Default.max");
+                int min = main.getmob().getInt("MythicMobs.Default.min");
+                int chance = main.getmob().getInt("MythicMobs.Default.chance");
+                Random randomInt = new Random();
+                for (String getstring : main.getmob().getConfigurationSection("MythicMobs.").getKeys(false)) {
+                    if (mobname.equalsIgnoreCase(getstring)) {
+                        max = main.getmob().getInt("MythicMobs." + mobname + ".max");
+                        min = main.getmob().getInt("MythicMobs." + mobname + ".min");
+                        chance = main.getmob().getInt("MythicMobs." + mobname + ".chance");
+                        break;
+                    }
+                }
+                max = max - min;
+                int random = min + randomInt.nextInt(max);
+                chance = chance;
+                double chancee = Math.random() * 100.0D;
+                if (chancee <= chance) {
+                    main.addLives(p, random);
+                    p.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message").replace("%souls%", Integer.toString(random)).replace("%mob%", mme.getEntity().getName())));
+                }
+            }
+        }
+    }
+
+
 
     @EventHandler
     public void death(PlayerDeathEvent e) {
