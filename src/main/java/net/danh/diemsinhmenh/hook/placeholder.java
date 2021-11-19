@@ -1,6 +1,7 @@
-package net.danh.diemsinhmenh;
+package net.danh.diemsinhmenh.hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.danh.diemsinhmenh.Main;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 

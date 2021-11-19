@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    if: contains(github.event.head_commit.message, '[RELEASE]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,8 +20,8 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v1.2.3"
+          automatic_release_tag: "v1.2.9"
           prerelease: false
           title: "Development Build"
           files: |
-            ./target/SoulPoints-1.2.3.jar
+            ./target/SoulPoints.jar
