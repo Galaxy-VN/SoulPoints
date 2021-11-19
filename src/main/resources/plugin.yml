@@ -8,4 +8,4 @@ description: '${project.description}'
 commands:
   souls:
     description: Help Command
-    usage: /<commands>
+    usage: /<commands> [add|remove|check|set|reset|reload] [player] [number]

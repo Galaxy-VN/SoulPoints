@@ -98,6 +98,16 @@ public class commands implements CommandExecutor  {
                         sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Set-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
                     }
                 }
+                if (args[0].equalsIgnoreCase("reset")) {
+                    if (!sender.hasPermission("souls.admin")) {
+                        sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Perm")));
+                    }
+
+                    if (sender.hasPermission("souls.admin")) {
+                        main.resetLives(Bukkit.getPlayer(args[1]));
+                        sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Reset-message")).replaceAll("%souls%", String.valueOf(main.getConfig().getInt("General.First_join"))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    }
+                }
             }
         }
         return true;

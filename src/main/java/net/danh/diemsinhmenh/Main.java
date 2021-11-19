@@ -34,8 +34,6 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
-        // registering here so the stats will load with the templates
         PluginManager manager = getServer().getPluginManager();
         if (manager.isPluginEnabled("MythicMobs")) {
             getLogger().log(Level.INFO, "Hooked onto MythicMobs");
@@ -50,6 +48,12 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("souls").setTabCompleter(new TabComplete());
         getServer().getPluginManager().registerEvents(new death(this), this);
         createConfigs();
+        if (getConfig().getInt("config-version") != 8) {
+            getLogger().severe("Outdated config! Please backup & update config.yml file and restart server again!!");
+        }
+        if (getlang().getInt("lang-version") != 2) {
+            getLogger().severe("Outdated lang! Please backup & update lang.yml file and restart server again!!");
+        }
         new UpdateChecker(this, 96396).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
                 getLogger().info(ChatColor.GREEN + "There is not a new update available.");
@@ -199,8 +203,13 @@ public class Main extends JavaPlugin implements Listener {
         save();
     }
 
+    public void resetLives(Player p) {
+        getdata().set("Lives." + p.getUniqueId() + ".life", this.getConfig().getInt("General.First_join"));
+        save();
+    }
+
     public String convert(String s) {
-        return s.replace("&", "§");
+        return s.replaceAll("&", "§");
     }
 
 }

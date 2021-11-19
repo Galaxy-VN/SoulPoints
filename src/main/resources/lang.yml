@@ -4,6 +4,7 @@ lang:
        Death-message: '&d[Souls] &fYou lost %lost% souls because you dead, You have %souls% Souls Now!'
        Death-message-inventory: '&4[Souls] &cYou have lost random item because you do not enough souls to keep it!'
        Kill-message: '&d[Souls] &bYou receive %souls% Souls because you killed %player%'
+       Reset-message: '&d[Souls] &6You have set the souls of %player% to %souls%'
        Kill-mobs-message: '&d[Souls] &bYou get %souls% souls from killing mobs &f(&e%mob%&f)'
        Take-message: '&4[Souls] &cRemove %souls% souls from %player%'
        Add-message: '&4[Souls] &cAdd %souls% souls to %player%'
@@ -19,6 +20,7 @@ lang:
        Death-message: '&d[Souls] &f你失去了 %lost% 点灵魂点数, 现在有 %souls% 灵魂点数剩余!'
        Death-message-inventory: '&4[Souls] &c缺少足够灵魂点数, 背包内物品已随机掉落!'
        Kill-message: '&d[Souls] &b你通过击杀玩家 %player% 获得了 %souls% 灵魂点数'
+       Reset-message: '&d[Souls] &6您已将 %player% 的灵魂设置为 %souls%'
        Kill-mobs-message: '&d[Souls] &b你通过杀死怪物获得 %souls% 的灵魂 &f(&e%mob%&f)'
        Take-message: '&4[Souls] &c你移除了玩家 %player% %souls% 点灵魂点数'
        Add-message: '&4[Souls] &c给予玩家 %player% 了点 %souls%灵魂点数'
@@ -34,6 +36,7 @@ lang:
     Death-message: '&d[Souls] &fBạn đã chết và mất %lost% souls, bạn còn %souls% Souls!'
     Death-message-inventory: '&4[Souls] &cBạn đã bị mất đồ vì mất hết souls!'
     Kill-message: '&d[Souls] &bBạn nhận được %souls% Souls vì bạn giết người chơi %player%'
+    Reset-message: '&d[Souls] &6Bạn đã đặt số souls của %player% thành %souls%'
     Kill-mobs-message: '&d[Souls] &bBạn nhận được %souls% Souls từ việc giết mobs &f(&e%mob%&f)'
     Take-message: '&4[Souls] &cLoại bỏ %souls% souls từ %player%'
     Add-message: '&4[Souls] &cThêm %souls% souls cho %player%'
@@ -52,4 +55,4 @@ Help-admin:
   - "§a/souls remove <player> <amount> §f- §7Remove souls"
   - "§a/souls set <player> <amount> §f- §7Set souls"
   - "§a/souls reload §f- §7Reload Config"
-lang-version: 1
+lang-version: 2

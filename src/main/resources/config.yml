@@ -1,4 +1,4 @@
-config-version: 7
+config-version: 8
 DropRandomItems: true #false to lost all inventory
 language: enUs
 available-worlds:
