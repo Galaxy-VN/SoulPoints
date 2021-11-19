@@ -46,7 +46,7 @@ public class death implements Listener {
         if (main.getConfig().getBoolean("Mobs.Enable")) {
             if (Objects.requireNonNull(main.getConfig().getString("Mobs.KillType")).equalsIgnoreCase("Vanilla")) {
                 LivingEntity mob = e.getEntity();
-                Player player = (Player) mob.getKiller();
+                Player player = mob.getKiller();
                 String vanillamobs = e.getEntityType().toString();
                 Random randomInt = new Random();
                 int max = main.getmob().getInt("Vanilla.Default.max");
@@ -63,9 +63,11 @@ public class death implements Listener {
                 max = max - min;
                 int random = min + randomInt.nextInt(max);
                 double chancee = Math.random() * 100.0D;
-                if (chancee <= chance) {
-                    main.addLives(player, random);
-                    player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", Integer.toString(random)).replace("%mob%", mob.getName()));
+                if (player instanceof Player) {
+                    if (chancee <= chance) {
+                        main.addLives(player, random);
+                        player.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message")).replace("%souls%", Integer.toString(random)).replace("%mob%", mob.getName()));
+                    }
                 }
             }
         }
@@ -94,9 +96,11 @@ public class death implements Listener {
                 int random = min + randomInt.nextInt(max);
                 chance = chance;
                 double chancee = Math.random() * 100.0D;
-                if (chancee <= chance) {
-                    main.addLives(p, random);
-                    p.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message").replace("%souls%", Integer.toString(random)).replace("%mob%", mme.getEntity().getName())));
+                if (p instanceof Player) {
+                    if (chancee <= chance) {
+                        main.addLives(p, random);
+                        p.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Kill-mobs-message").replace("%souls%", Integer.toString(random)).replace("%mob%", mme.getEntity().getName())));
+                    }
                 }
             }
         }
