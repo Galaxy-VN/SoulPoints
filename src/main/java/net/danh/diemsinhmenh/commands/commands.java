@@ -70,22 +70,23 @@ public class commands implements CommandExecutor  {
                     }
                 }
 
-                if (args[0].equalsIgnoreCase("remove"))
+                if (args[0].equalsIgnoreCase("remove")) {
                     if (!sender.hasPermission("souls.admin")) {
                         sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Perm")));
                     }
-                if (sender.hasPermission("souls.admin")) {
-                    if (Bukkit.getPlayer(args[1]) == null) {
-                        sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Not-online")));
-                        return true;
-                    }
-                    if (main.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
-                        sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Enough")));
-                        return true;
-                    }
+                    if (sender.hasPermission("souls.admin")) {
+                        if (Bukkit.getPlayer(args[1]) == null) {
+                            sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Not-online")));
+                            return true;
+                        }
+                        if (main.getLives(Bukkit.getPlayer(args[1])) < Integer.parseInt(args[2])) {
+                            sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Enough")));
+                            return true;
+                        }
 
-                    main.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
-                    sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                        main.removeLives(Bukkit.getPlayer(args[1]), Integer.parseInt(args[2]));
+                        sender.sendMessage(main.convert(main.getlang().getString("lang." + main.getConfig().getString("language") + "." + "Take-message")).replaceAll("%souls%", String.valueOf(Integer.parseInt(args[2]))).replaceAll("%player%", Bukkit.getPlayer(args[1]).getName()));
+                    }
                 }
                 if (args[0].equalsIgnoreCase("set")) {
                     if (!sender.hasPermission("souls.admin")) {
