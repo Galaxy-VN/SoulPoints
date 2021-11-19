@@ -10,7 +10,6 @@ PVP:
   Kill-souls: 1
 Mobs:
   Enable: true
-  KillType: Vanilla #Vanilla/MythicMobs
 ActionBar:
   Enable: true
 General:
